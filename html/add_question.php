@@ -38,12 +38,12 @@
 			if (isset($_POST['add'])) {
 				$question = $_POST['question'];
 				if ($question == ''){
-					$message = "Please input question";
-				}else{
+                    $message = "<div class='alert alert-danger' role='alert'>Please input question</div>";
+                }else{
 					$sql = "INSERT INTO questions(question) values('$question')";
 					if ($db_connection->query($sql)){
-						$message = "Question added successfully";
-					}
+                        $message = "<div class='alert alert-success' role='alert'>Question added successfully</div>";
+                    }
 				}
 				if(isset($message)){
 					echo $message;

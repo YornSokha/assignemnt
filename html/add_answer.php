@@ -21,13 +21,11 @@
     $result = $db_connection->query($sql);
     $questions = [];
     if ($result->num_rows) {
-        $options = "";
+        $options = "<option value=\"0\">Choose a question</option>";
         while ($question = $result->fetch_assoc()) {
             $questions[$question['id']] = $question;
             $options .= "<option value=\"" . $question['id'] . "\">" . $question['question'] . "</option>";
         }
-    } else {
-        echo "no result";
     }
     $db_connection->close();
 ?>
@@ -45,7 +43,7 @@
                             <label for="question" class="col-sm-2 col-form-label">Question</label>
                             <div class="col-sm-10">
                                 <select name="question" id="question" class="form-control">
-                                    <?php if ($options === "") { ?>
+                                    <?php if ($options == "") { ?>
                                         <option value="0">No question</option>
                                     <?php } else {
                                         echo $options;
@@ -74,11 +72,13 @@
                 $answer = $_POST['answer'];
                 $question_id = $_POST['question'];
                 if ($question_id == 0 || $answer == "") {
-                    $message = "Please choose a question and enter your answer!";
+                    $message = "<div class='alert alert-danger' role='alert'>Please choose a question and enter your answer!</div>";
                 } else {
+                    echo "ID : " . $question_id . "<br>";
+                    echo "answer : ". $answer;
                     $sql = "INSERT INTO answers(q_id, answer) values('$question_id', '$answer')";
                     if ($db_connection->query($sql)) {
-                        $message = "Answer added successfully";
+                        $message = "<div class='alert alert-success' role='alert'>Answer added successfully</div>";
                     }
                 }
                 if (isset($message)) {

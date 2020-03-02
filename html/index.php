@@ -31,7 +31,9 @@
                         $questions[$question['id']] = $question;
                     }
                 } else {
-                    echo "no result";
+                    echo "<div class='alert alert-danger' role='alert'>
+                            No question is available.
+                            </div>";
                 }
 
                 $result = $db_connection->query("select id, q_id, answer from answers");
@@ -55,7 +57,7 @@
                 ?>
                 <?php foreach ($questions
 
-                               as $question) { echo "<pre>". print_r($question, true) ."</pre>"
+                               as $question) {
                     ?>
                     <div class="card">
                         <div class="card-header p-2" id="heading-<?php echo $question['id'] ?>">
