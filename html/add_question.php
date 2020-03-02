@@ -49,6 +49,7 @@
 					echo $message;
 				}
 			}
+            $db_connection->close();
 			
 			?>
 		</div>

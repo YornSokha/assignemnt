@@ -6,9 +6,8 @@
 	<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
 		<div class="navbar-nav">
 <!--			<a class="nav-item nav-link active" href="#">Home <span class="sr-only">(current)</span></a>-->
-			<a class="nav-item nav-link" href="add_question.php">New question</a>
-			<a class="nav-item nav-link" href="#">Pricing</a>
-			<a class="nav-item nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+			<a class="nav-item nav-link" href="add_question.php">New Question</a>
+			<a class="nav-item nav-link" href="add_answer.php">New Answer</a>
 		</div>
 	</div>
 </nav>
