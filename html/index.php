@@ -21,9 +21,10 @@
                 $db_connection = new mysqli($host, $user, $password, $dbname);
                 if ($db_connection->connect_errno) {
                     echo "Failed to connect to database";
+                    exit;
                 }
-
-                $sql = "SELECT id, question from questions";
+				// to fetch all questions
+                $sql = "SELECT id, question FROM questions";
                 $result = $db_connection->query($sql);
                 $questions = [];
                 if ($result->num_rows) {
@@ -35,11 +36,12 @@
                             No question is available.
                             </div>";
                 }
-
-                $result = $db_connection->query("select id, q_id, answer from answers");
+				// to fetch all answers for each question
+                $result = $db_connection->query("select id, q_id, answer from answers order by q_id;");
                 $last_id_checked = -1;
                 $reserved_answer = [];
                 $list_answers = [];
+                $i = 1;
                 while ($answer = $result->fetch_assoc()) {
                     if ($last_id_checked == $answer['q_id']) {
                         if (count($list_answers) == 0)
@@ -47,7 +49,8 @@
                         $list_answers[] = $answer;
 
                         $questions[$answer['q_id']]['answers'] = $list_answers;
-                    } else {
+					} else {
+						$list_answers = [];
                         $questions[$answer['q_id']]['answers'] = $answer;
                     }
                     $reserved_answer = $answer;
@@ -97,28 +100,6 @@
             </div>
         </div>
     </div>
-
-    <!--	--><?php
-    //	$db_connection = new mysqli($host, $user, $password, $dbname);
-    //	if ($db_connection->connect_errno) {
-    //		echo "Failed to connect to MySQL: (" . $db_connection->connect_errno . ") " . $db_connection->connect_error;
-    //	}else{
-    //		echo "SUCCESS";
-    //	}
-    //	$sql = "INSERT INTO Questions(question) VALUES(\"What is your name?\")";
-    //	if ($db_connection->query($sql)){
-    //		echo "question INSERTED";
-    //	} else {
-    //		echo "Error : ". $sql . "<br>". $db_connection->error;
-    //	}
-    //	$last_id = mysqli_insert_id($db_connection);
-    //	$sql = "INSERT INTO Answers(q_id, answer) VALUES($last_id, \"My name is Sokha.\")";
-    //	if ($db_connection->query($sql)){
-    //		echo "Answer INSERTED";
-    //	} else {
-    //		echo "Error : ". $sql . "<br>". $db_connection->error;
-    //	}
-    //	?>
 </div>
 <?php include("footer.php"); ?>
 </body>

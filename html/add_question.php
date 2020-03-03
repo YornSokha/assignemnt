@@ -18,7 +18,7 @@
 		<div class="col-10 mx-auto">
 			<form action="add_question.php" class="form-group" method="post">
 				<div class="card">
-					<div class="car-head">
+					<div class="card-header">
 						<h4 class="text-center">New Question</h4>
 					</div>
 					<div class="card-body">
@@ -34,7 +34,7 @@
 			if ($db_connection->connect_errno) {
 				echo "Failed to connect to database";
 			}
-
+			// button add clicked
 			if (isset($_POST['add'])) {
 				$question = $_POST['question'];
 				if ($question == ''){
@@ -50,32 +50,9 @@
 				}
 			}
             $db_connection->close();
-			
 			?>
 		</div>
 	</div>
-
-	<!--	--><?php
-	//	$db_connection = new mysqli($host, $user, $password, $dbname);
-	//	if ($db_connection->connect_errno) {
-	//		echo "Failed to connect to MySQL: (" . $db_connection->connect_errno . ") " . $db_connection->connect_error;
-	//	}else{
-	//		echo "SUCCESS";
-	//	}
-	//	$sql = "INSERT INTO Questions(question) VALUES(\"What is your name?\")";
-	//	if ($db_connection->query($sql)){
-	//		echo "question INSERTED";
-	//	} else {
-	//		echo "Error : ". $sql . "<br>". $db_connection->error;
-	//	}
-	//	$last_id = mysqli_insert_id($db_connection);
-	//	$sql = "INSERT INTO Answers(q_id, answer) VALUES($last_id, \"My name is Sokha.\")";
-	//	if ($db_connection->query($sql)){
-	//		echo "Answer INSERTED";
-	//	} else {
-	//		echo "Error : ". $sql . "<br>". $db_connection->error;
-	//	}
-	//	?>
 </div>
 <?php include("footer.php"); ?>
 </body>
